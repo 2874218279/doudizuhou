@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>北京理工大学永胜学院信息管理系统</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="../static/layui-v2.5.6/layui/css/layui.css"  media="all">
+	</head>
+	<body style="width:97%;margin:0 auto;">
+		<div class="layui-tab">
+			<ul class="layui-tab-title">
+				<li class="layui-this" id="tab1" onclick="$('#tab2').text('用户添加');">用户列表</li>
+				<li id="tab2" onclick="$('#resetBtn').click();$('#tab2').text('用户添加');$('#inputForm input[name=id]').val('');">用户添加</li>
+			</ul>
+			<div class="layui-tab-content">
+				<div class="layui-tab-item layui-show">
+					<div class="layui-form" id="searchForm">
+						<div class="layui-form-item" style="margin-top: 20px;">
+							<div class="layui-inline">
+								<label class="layui-form-label" style="width:50px;">姓名</label>
+								<div class="layui-input-inline" style="width:150px;">
+									<input type="text" name="name" lay-verify="title" autocomplete="off" placeholder="请输入姓名" class="layui-input">
+								</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label" style="width:40px;">性别</label>
+								<div class="layui-input-inline" style="width:150px;">
+									<select name="sex" id="sex" lay-filter="aihao">
+										<option value=""></option>
+										<option value="1">男</option>
+										<option value="2">女</option>
+									</select>
+								</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">所在城市</label>
+								<div class="layui-input-inline" style="width:150px;">
+									<select name="city" id="city" lay-filter="aihao">
+										<option value=""></option>
+										<option value="1">北京</option>
+										<option value="2">上海</option>
+										<option value="3">广州</option>
+										<option value="4">深圳</option>
+										<option value="5">杭州</option>
+									</select>
+								</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">用户类型</label>
+								<div class="layui-input-inline" style="width:150px;">
+									<select name="usertype" id="usertype" lay-filter="aihao">
+										<option value=""></option>
+										<option value="1">后台用户</option>
+										<option value="2">前台用户</option>
+									</select>
+								</div>
+							</div>
+							<div class="layui-inline">
+								<button type="button" class="layui-btn layui-btn-normal" onclick="search(0)">查询</button>
+								<button type="button" class="layui-btn layui-btn-primary" onclick="search(1)">重置</button>
+							</div>
+						</div>
+						<table class="layui-table" id="contentTable">
+							<thead>
+								<tr>
+									<th>序号</th>
+									<th>姓名</th>
+									<th>账号</th>
+									<th>性别</th>
+									<th>出生年月</th>
+									<th>所在城市</th>
+									<th>手机号</th>
+									<th>邮箱</th>
+									<th>用户类型</th>
+									<th>操作</th>
+								</tr> 
+							</thead>
+							<tbody>
+								<tr class="line_1">
+									<td>1</td>
+									<td>王艳芳</td>
+									<td>00001</td>
+									<td>女</td>
+									<td>1992-02-01</td>
+									<td>广州</td>
+									<td>17510403556</td>
+									<td>wanyanfang@163.com</td>
+									<td>后台用户</td>
+									<td style="display:none;">123456</td>
+									<td style="display:none;">无</td>
+									<td>
+										<button type="button" class="layui-btn layui-btn-primary layui-btn-sm" title="编辑" onclick="update(1)"><i class="layui-icon"></i></button>
+										<button type="button" class="layui-btn layui-btn-danger layui-btn-sm" title="删除" onclick="deleteLine(1)"><i class="layui-icon"></i></button>
+									</td>
+								</tr>
+								<tr class="line_2">
+									<td>2</td>
+									<td>闫海</td>
+									<td>00002</td>
+									<td>男</td>
+									<td>1989-10-29</td>
+									<td>北京</td>
+									<td>18510203345</td>
+									<td>yanhai@163.com</td>
+									<td>后台用户</td>
+									<td style="display:none;">123456</td>
+									<td style="display:none;">无</td>
+									<td>
+										<button type="button" class="layui-btn layui-btn-primary layui-btn-sm" title="编辑" onclick="update(2)"><i class="layui-icon"></i></button>
+										<button type="button" class="layui-btn layui-btn-danger layui-btn-sm" title="删除" onclick="deleteLine(2)"><i class="layui-icon"></i></button>
+									</td>
+								</tr>
+								<tr class="line_3">
+									<td>3</td>
+									<td>张峰林</td>
+									<td>00003</td>
+									<td>女</td>
+									<td>1985-05-08</td>
+									<td>北京</td>
+									<td>13617272882</td>
+									<td>zhangfl@163.com</td>
+									<td>后台用户</td>
+									<td style="display:none;">123456</td>
+									<td style="display:none;">无</td>
+									<td>
+										<button type="button" class="layui-btn layui-btn-primary layui-btn-sm" title="编辑" onclick="update(3)"onclick="update(1)"><i class="layui-icon"></i></button>
+										<button type="button" class="layui-btn layui-btn-danger layui-btn-sm" title="删除" onclick="deleteLine(3)"><i class="layui-icon"></i></button>
+									</td>
+								</tr>
+								<tr class="line_4">
+									<td>4</td>
+									<td>刘子妍</td>
+									<td>00004</td>
+									<td>女</td>
+									<td>1994-05-05</td>
+									<td>上海</td>
+									<td>17852661232</td>
+									<td>1647298377@qq.com</td>
+									<td>后台用户</td>
+									<td style="display:none;">123456</td>
+									<td style="display:none;">无</td>
+									<td>
+										<button type="button" class="layui-btn layui-btn-primary layui-btn-sm" title="编辑" onclick="update(4)"><i class="layui-icon"></i></button>
+										<button type="button" class="layui-btn layui-btn-danger layui-btn-sm" title="删除" onclick="deleteLine(4)"><i class="layui-icon"></i></button>
+									</td>
+								</tr>
+								<tr class="line_5">
+									<td>5</td>
+									<td>张涵</td>
+									<td>zhanghan</td>
+									<td>女</td>
+									<td>1993-06-07</td>
+									<td>上海</td>
+									<td>15678826632</td>
+									<td>zhanghan@163.com</td>
+									<td>前台用户</td>
+									<td style="display:none;">123456</td>
+									<td style="display:none;">无</td>
+									<td>
+										<button type="button" class="layui-btn layui-btn-primary layui-btn-sm" title="编辑" onclick="update(5)"><i class="layui-icon"></i></button>
+										<button type="button" class="layui-btn layui-btn-danger layui-btn-sm" title="删除" onclick="deleteLine(5)"><i class="layui-icon"></i></button>
+									</td>
+								</tr>
+								<tr class="line_6">
+									<td>6</td>
+									<td>杨国强</td>
+									<td>guoqiang</td>
+									<td>男</td>
+									<td>1988-09-07</td>
+									<td>深圳</td>
+									<td>17898820002</td>
+									<td>guoqiang@qq.com</td>
+									<td>前台用户</td>
+									<td style="display:none;">123456</td>
+									<td style="display:none;">无</td>
+									<td>
+										<button type="button" class="layui-btn layui-btn-primary layui-btn-sm" title="编辑" onclick="update(6)"><i class="layui-icon"></i></button>
+										<button type="button" class="layui-btn layui-btn-danger layui-btn-sm" title="删除" onclick="deleteLine(6)"><i class="layui-icon"></i></button>
+									</td>
+								</tr>
+								<tr class="line_7">
+									<td>7</td>
+									<td>武越</td>
+									<td>wuyue</td>
+									<td>男</td>
+									<td>1996-12-07</td>
+									<td>北京</td>
+									<td>15678217266</td>
+									<td>wuyue@qq.com</td>
+									<td>前台用户</td>
+									<td style="display:none;">123456</td>
+									<td style="display:none;">无</td>
+									<td>
+										<button type="button" class="layui-btn layui-btn-primary layui-btn-sm" title="编辑" onclick="update(7)"><i class="layui-icon"></i></button>
+										<button type="button" class="layui-btn layui-btn-danger layui-btn-sm" title="删除" onclick="deleteLine(7)"><i class="layui-icon"></i></button>
+									</td>
+								</tr>
+								<tr class="line_8">
+									<td>8</td>
+									<td>潘家豪</td>
+									<td>pjiahao</td>
+									<td>男</td>
+									<td>1992-06-22</td>
+									<td>北京</td>
+									<td>13563787211</td>
+									<td>13563787211@163.com</td>
+									<td>前台用户</td>
+									<td style="display:none;">123456</td>
+									<td style="display:none;">无</td>
+									<td>
+										<button type="button" class="layui-btn layui-btn-primary layui-btn-sm" title="编辑" onclick="update(8)"><i class="layui-icon"></i></button>
+										<button type="button" class="layui-btn layui-btn-danger layui-btn-sm" title="删除" onclick="deleteLine(8)"><i class="layui-icon"></i></button>
+									</td>
+								</tr>
+								<tr class="line_9">
+									<td>9</td>
+									<td>王璐</td>
+									<td>wanglu</td>
+									<td>女</td>
+									<td>1994-08-23</td>
+									<td>杭州</td>
+									<td>17588212762</td>
+									<td>wanglu@163.com</td>
+									<td>前台用户</td>
+									<td style="display:none;">123456</td>
+									<td style="display:none;">无</td>
+									<td>
+										<button type="button" class="layui-btn layui-btn-primary layui-btn-sm" title="编辑" onclick="update(9)"><i class="layui-icon"></i></button>
+										<button type="button" class="layui-btn layui-btn-danger layui-btn-sm" title="删除" onclick="deleteLine(9)"><i class="layui-icon"></i></button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div id="page"></div>
+				</div>
+				<!-- 用户添加 -->
+				<div class="layui-tab-item">
+					<div style="width:30%;margin-top:20px;">  
+						<form class="layui-form" id="inputForm" lay-filter="example" action="">
+						  <input type="hidden" name="id" value=""/>
+						  <div class="layui-form-item">
+							<label class="layui-form-label"><span style="color:red;">* </span>姓名</label>
+							<div class="layui-input-block">
+							  <input type="text" name="name" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+							</div>
+						  </div>
+						  <div class="layui-form-item">
+							<label class="layui-form-label"><span style="color:red;">* </span>账号</label>
+							<div class="layui-input-block">
+							  <input type="text" name="username" required  lay-verify="required" placeholder="请输入账号" autocomplete="off" class="layui-input">
+							</div>
+						  </div>
+						  <div class="layui-form-item">
+							<label class="layui-form-label"><span style="color:red;">* </span>密码</label>
+							<div class="layui-input-inline">
+							  <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+							</div>
+							<div class="layui-form-mid layui-word-aux">大于6位</div>
+						  </div>
+						   <div class="layui-form-item">
+							<label class="layui-form-label"><span style="color:red;">* </span>性别</label>
+							<div class="layui-input-block">
+							  <input type="radio" name="sex" value="1" title="男" checked>
+							  <input type="radio" name="sex" value="2" title="女">
+							</div>
+						  </div>
+						   <div class="layui-form-item">
+							<label class="layui-form-label"><span style="color:red;">* </span>出生年月</label>
+							<div class="layui-input-inline">
+								<input type="text" name="birthdate" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+							</div>
+						  </div>
+						  <div class="layui-form-item">
+							<label class="layui-form-label"><span style="color:red;">* </span>所在城市</label>
+							<div class="layui-input-block">
+							  <select name="city" id="city" lay-verify="required">
+								<option value=""></option>
+								<option value="1">北京</option>
+								<option value="2">上海</option>
+								<option value="3">广州</option>
+								<option value="4">深圳</option>
+								<option value="5">杭州</option>
+							  </select>
+							</div>
+						  </div>
+						  <div class="layui-form-item">
+							<div class="layui-inline">
+							  <label class="layui-form-label"><span style="color:red;">* </span>手机号</label>
+							  <div class="layui-input-inline">
+								<input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input">
+							  </div>
+							</div>
+						  </div>
+						  <div class="layui-form-item">
+							<div class="layui-inline">
+							  <label class="layui-form-label"><span style="color:red;">* </span>邮箱</label>
+							  <div class="layui-input-inline">
+								<input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+							  </div>
+							</div>
+						  </div>
+						  <div class="layui-form-item">
+							<label class="layui-form-label"><span style="color:red;">* </span>用户类型</label>
+							<div class="layui-input-block">
+							  <input type="radio" name="usertype" value="1" title="后台用户" checked>
+							  <input type="radio" name="usertype" value="2" title="前台用户">
+							</div>
+						  </div>
+						  <div class="layui-form-item layui-form-text">
+							<label class="layui-form-label">备注</label>
+							<div class="layui-input-block">
+							  <textarea name="remark" placeholder="请输入内容" class="layui-textarea"></textarea>
+							</div>
+						  </div>
+						  <div class="layui-form-item">
+							<div class="layui-input-block">
+							  <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo">保存</button>
+							  <button type="reset" class="layui-btn layui-btn-primary" id="resetBtn">重置</button>
+							  <button type="button" class="layui-btn layui-btn-primary" onclick="$('#resetBtn,#tab1').click();">返回</button>
+							</div>
+						  </div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../static/jquery/jquery-3.2.1.min.js"></script>
+		<script src="../static/layui-v2.5.6/layui/layui.js" charset="utf-8"></script>
+		<script>
+			layui.use(['form','element'], function(){
+				var $ = layui.jquery
+				,element = layui.element;
+			});
+			layui.use(['laypage', 'layer'], function(){
+				var laypage = layui.laypage
+				,layer = layui.layer;
+				// 总页数低于页码总数
+				laypage.render({
+					elem: 'page'
+					,theme: '#1E9FFF'
+					,count: 10 // 数据总数
+				});
+			});
+			layui.use(['form','element','laydate'], function(){
+				// 选择日期
+				layui.laydate.render({
+					elem: '#date'
+				});
+				var form = layui.form;
+				// 监听提交
+				form.on('submit(formDemo)', function(data){
+					// layer.msg(JSON.stringify(data.field));
+					var id = $("#inputForm input[name='id']").val();
+					var name = $("#inputForm input[name='name']").val();
+					var username = $("#inputForm input[name='username']").val();
+					var password = $("#inputForm input[name='password']").val();
+					var sex = $("#inputForm input[name='sex']:checked").val();
+					if (sex == "1") sex = "男";
+					else sex = "女";
+					var birthdate = $("#inputForm input[name='birthdate']").val();
+					var city = $("#inputForm #city option:selected").text();
+					var phone = $("#inputForm input[name='phone']").val();
+					var email = $("#inputForm input[name='email']").val();
+					var usertype = $("#inputForm input[name='usertype']:checked").val();
+					if (usertype == "1") usertype = "后台用户";
+					else usertype = "前台用户";
+					var remark = $("#inputForm textarea[name='remark']").val();
+					var massage = "";
+					if (id != "") {
+						// 修改
+						var name = $(".line_" + id).children('td').eq(1).text(name);
+						var username = $(".line_" + id).children('td').eq(2).text(username);
+						var sex = $(".line_" + id).children('td').eq(3).text(sex);
+						var birthdate = $(".line_" + id).children('td').eq(4).text(birthdate);
+						var city = $(".line_" + id).children('td').eq(5).text(city);
+						var phone = $(".line_" + id).children('td').eq(6).text(phone);
+						var email = $(".line_" + id).children('td').eq(7).text(email);
+						var usertype = $(".line_" + id).children('td').eq(8).text(usertype);
+						var password = $(".line_" + id).children('td').eq(9).text(password);
+						var remark = $(".line_" + id).children('td').eq(10).text(remark);
+						massage = "修改成功！";
+					} else {
+						// 新增
+						var dataCount = 0;
+						$('#contentTable tbody').find('tr').each(function(){
+							var id = parseInt($(this).children('td').eq(0).text().trim());
+							if (id > dataCount)
+								dataCount = id;
+						})
+						dataCount = dataCount + 1;
+						var html = "<tr class='line_"+dataCount+"'>";
+						html += "<td>"+dataCount+"</td>";
+						html += "<td>"+name+"</td>";
+						html += "<td>"+username+"</td>";
+						html += "<td>"+sex+"</td>";
+						html += "<td>"+birthdate+"</td>";
+						html += "<td>"+city+"</td>";
+						html += "<td>"+phone+"</td>";
+						html += "<td>"+email+"</td>";
+						html += "<td>"+usertype+"</td>";
+						html += "<td style='display:none;'>"+password+"</td>";
+						html += "<td style='display:none;'>"+remark+"</td>";
+						html += "<td>";
+						html += "<button type='button' class='layui-btn layui-btn-primary layui-btn-sm' title='编辑' onclick='update("+dataCount+")'><i class='layui-icon'></i></button>";
+						html += "<button type='button' class='layui-btn layui-btn-danger layui-btn-sm' title='删除' onclick='deleteLine("+dataCount+")'><i class='layui-icon'></i></button>";
+						html += "</td>";
+						html += "</tr>";
+						$("#contentTable tbody").append(html);
+						massage = "添加成功！";
+					}
+					$("#resetBtn,#tab1").click();
+					layer.msg(massage,{icon:1});
+					return false;
+				});
+			});
+			 // 查询 
+			 function search(type){
+				if (type == 0) {
+					$("#contentTable tbody tr").css("display","");
+					var nameInput = $("#searchForm input[name='name']").val().trim();
+					var sexSelect = $("#searchForm #sex option:selected").text().trim();
+					var citySelect = $("#searchForm #city option:selected").text().trim();
+					var usertypeSelect = $("#searchForm #usertype option:selected").text().trim();
+					for (var i = 0; i < $("#contentTable tbody tr").length; i++) {
+						var name = $("#contentTable tbody tr").eq(i).children('td').eq(1).text().trim();
+						var sex = $("#contentTable tbody tr").eq(i).children('td').eq(3).text().trim();
+						var city = $("#contentTable tbody tr").eq(i).children('td').eq(5).text().trim();
+						var usertype = $("#contentTable tbody tr").eq(i).children('td').eq(8).text().trim();
+						if (name.indexOf(nameInput) == -1 || sex.indexOf(sexSelect) == -1 || city.indexOf(citySelect) == -1 || usertype.indexOf(usertypeSelect) == -1) {
+							$("#contentTable tbody tr").eq(i).css("display","none");
+						}
+					}
+				 } else {
+					 $("#contentTable tbody tr").css("display","");
+					 $("#searchForm input[name='name']").val("");
+					 $('#searchForm #sex').siblings("div.layui-form-select").find('dl').find('dd[lay-value=""]').click();
+					 $('#searchForm #city').siblings("div.layui-form-select").find('dl').find('dd[lay-value=""]').click();
+					 $('#searchForm #usertype').siblings("div.layui-form-select").find('dl').find('dd[lay-value=""]').click();
+				 }
+			}
+			// 删除
+			function deleteLine(linenum) {
+				layer.confirm('您确认要删除该条数据吗？', {
+				  btn: ['确认','取消'], title : '系统提示', icon: 3
+				}, function(index){
+					$(".line_" + linenum).remove();
+					layer.close(index);
+					layer.msg('删除成功！',{icon:1});
+				})
+			}
+			// 修改
+			function update(index) {
+				$("#tab2").click();
+				$("#tab2").text("用户修改");
+				// 取值
+				var id = $(".line_" + index).children('td').eq(0).text().trim();
+				var name = $(".line_" + index).children('td').eq(1).text().trim();
+				var username = $(".line_" + index).children('td').eq(2).text().trim();
+				var sex = $(".line_" + index).children('td').eq(3).text().trim();
+				var birthdate = $(".line_" + index).children('td').eq(4).text().trim();
+				var city = $(".line_" + index).children('td').eq(5).text().trim();
+				var phone = $(".line_" + index).children('td').eq(6).text().trim();
+				var email = $(".line_" + index).children('td').eq(7).text().trim();
+				var usertype = $(".line_" + index).children('td').eq(8).text().trim();
+				var password = $(".line_" + index).children('td').eq(9).text().trim();
+				var remark = $(".line_" + index).children('td').eq(10).text().trim();
+				// 赋值
+				$("#inputForm input[name='id']").val(id);
+				$("#inputForm input[name='name']").val(name);
+				$("#inputForm input[name='username']").val(username);
+				$("#inputForm input[name='password']").val(password);
+				if (sex == "男") {
+					$("#inputForm input:radio[name='sex']")[0].checked = true;
+					layui.form.render('radio');	
+				} else {
+					$("#inputForm input:radio[name='sex']")[1].checked = true;
+					layui.form.render('radio');
+				}
+				$("#inputForm input[name='birthdate']").val(birthdate);
+				if (city == "北京") {
+					$('#inputForm #city').siblings("div.layui-form-select").find('dl').find('dd[lay-value="1"]').click();
+				} else if (city == "上海") {
+					$('#inputForm #city').siblings("div.layui-form-select").find('dl').find('dd[lay-value="2"]').click();
+				} else if (city == "广州") {
+					$('#inputForm #city').siblings("div.layui-form-select").find('dl').find('dd[lay-value="3"]').click();
+				} else if (city == "深圳") {
+					$('#inputForm #city').siblings("div.layui-form-select").find('dl').find('dd[lay-value="4"]').click();
+				} else {
+					$('#inputForm #city').siblings("div.layui-form-select").find('dl').find('dd[lay-value="5"]').click();
+				}
+				$("#inputForm input[name='phone']").val(phone);
+				$("#inputForm input[name='email']").val(email);
+				if (usertype == "后台用户") {
+					$("#inputForm input:radio[name='usertype']")[0].checked = true;
+					layui.form.render('radio');	
+				} else {
+					$("#inputForm input:radio[name='usertype']")[1].checked = true;
+					layui.form.render('radio');	
+				}
+				$("#inputForm textarea[name='remark']").val(remark);
+			}
+		</script>
+	</body>
+</html>

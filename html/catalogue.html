@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>北京理工大学永胜学院信息管理系统</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="../static/layui-v2.5.6/layui/css/layui.css"  media="all">
+	</head>
+	<body style="padding:10px 0px 0px 80px;">
+		<div style="width:50%;">
+			<fieldset class="layui-elem-field layui-field-title" style="margin-top:30px;">
+				<legend>目录管理</legend>
+			</fieldset>
+		</div>
+		<div style="float:left;margin-left:25px;">
+			<div id="trees1" class="demo-tree demo-tree-box" style="height:300px;"></div>
+		</div>
+		<div style="float:left;margin-left:50px;">
+			<div id="trees2" class="demo-tree demo-tree-box" style="height:300px;"></div>
+		</div>
+		<script src="../static/layui-v2.5.6/layui/layui.js" charset="utf-8"></script>
+		<script>
+			layui.use(['tree', 'util'], function(){
+			  var tree = layui.tree
+			  ,layer = layui.layer
+			  ,util = layui.util
+			  // 视频目录模拟数据
+			  ,data1 = [{
+				title: '视频'
+				,id: 1
+				,spread: true
+				,children: [{
+				  title: '计算机类'
+				  ,id: 1000
+				  ,spread: true
+				  ,children: [{
+					title: 'C'
+					,id: 10001
+				  },{
+					title: 'Java'
+					,id: 10002
+				  },{
+					title: '前端'
+					,id: 10003
+				  },{
+					title: 'Python'
+					,id: 10004
+				  },{
+					title: '数据库'
+					,id: 10005
+				  }]
+				},{
+				  title: '理学类'
+				  ,id: 1001
+				  ,spread: true
+				  ,children: [{
+					title: '数学'
+					,id: 10011
+				  },{
+					title: '物理'
+					,id: 10012
+				  },{
+					title: '化学'
+					,id: 10013
+				  },{
+					title: '天文学'
+					,id: 10014
+				  },{
+					title: '地理科学'
+					,id: 10015
+				  }]
+				},{
+				  title: '语言类'
+				  ,id: 1002
+				  ,spread: true
+				  ,children: [{
+					title: '对外汉语'
+					,id: 10021
+				  },{
+					title: '六级雅思'
+					,id: 10022
+				  },{
+					title: '考研英语'
+					,id: 10023
+				  },{
+					title: '听力口语'
+					,id: 10023
+				  },{
+					title: '写作翻译'
+					,id: 10023
+				  }]
+				}]
+			  }]
+			  ,data2 = [{
+				title: '电子书'
+				,id: 2
+				,spread: true
+				,children: [{
+				  title: '计算机类'
+				  ,id: 2000
+				  ,spread: true
+				  ,children: [{
+					title: 'C'
+					,id: 20001
+				  },{
+					title: 'Java'
+					,id: 20002
+				  },{
+					title: '前端'
+					,id: 20003
+				  },{
+					title: 'Python'
+					,id: 20004
+				  },{
+					title: '数据库'
+					,id: 20005
+				  }]
+				},{
+				  title: '理学类'
+				  ,id: 2001
+				  ,spread: true
+				  ,children: [{
+					title: '数学'
+					,id: 20011
+				  },{
+					title: '物理'
+					,id: 20012
+				  },{
+					title: '化学'
+					,id: 20013
+				  },{
+					title: '天文学'
+					,id: 20014
+				  },{
+					title: '地理科学'
+					,id: 20015
+				  }]
+				},{
+				  title: '语言类'
+				  ,id: 2002
+				  ,spread: true
+				  ,children: [{
+					title: '对外汉语'
+					,id: 20021
+				  },{
+					title: '六级雅思'
+					,id: 20022
+				  },{
+					title: '考研英语'
+					,id: 20023
+				  },{
+					title: '听力口语'
+					,id: 20023
+				  },{
+					title: '写作翻译'
+					,id: 20023
+				  }]
+				}]
+			  }]
+			  // 开启节点操作图标
+			  tree.render({
+				elem: '#trees1'
+				,data: data1
+				,edit: ['add', 'update', 'del'] //操作节点的图标
+				,click: function(obj){
+				  layer.msg(JSON.stringify(obj.data));
+				}
+			  });
+			  // 开启节点操作图标
+			  tree.render({
+				elem: '#trees2'
+				,data: data2
+				,edit: ['add', 'update', 'del'] //操作节点的图标
+				,click: function(obj){
+				  layer.msg(JSON.stringify(obj.data));
+				}
+			  });
+			});
+		</script>
+	</body>
+</html>

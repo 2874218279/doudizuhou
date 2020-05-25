@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>北京理工大学永胜学院信息管理系统</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="../static/layui-v2.5.6/layui/css/layui.css"  media="all">
+	</head>
+	<body style="width:97%;margin:0 auto;">
+		<div class="layui-tab">
+			<ul class="layui-tab-title">
+				<li class="layui-this" id="tab">购物车列表</li>
+			</ul>
+			<div class="layui-tab-content">
+				<div class="layui-tab-item layui-show">
+					<div class="layui-form" id="searchForm">
+						<div class="layui-form-item" style="margin-top: 20px;">
+							<div class="layui-inline">
+								<label class="layui-form-label">产品名称</label>
+								<div class="layui-input-inline" style="width:150px;">
+									<input type="text" name="name" lay-verify="title" autocomplete="off" placeholder="请输入产品" class="layui-input">
+								</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">所属目录</label>
+								<div class="layui-input-inline" style="width:150px;">
+									<select name="catalogue" id="catalogue" lay-filter="aihao">
+										<option value=""></option>
+										<option value="1">视频</option>
+										<option value="2">电子书</option>
+									</select>
+								</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">所属分类</label>
+								<div class="layui-input-inline">
+									<select name="type" id="type" lay-search="">
+										<option value=""></option>
+										<optgroup label="计算机类">
+											<option value="10001">C</option>
+											<option value="10002">Java</option>
+											<option value="10003">前端</option>
+											<option value="10004">Python</option>
+											<option value="10005">数据库</option>
+										</optgroup>
+										<optgroup label="理学类">
+											<option value="10011">数学</option>
+											<option value="10012">物理</option>
+											<option value="10013">化学</option>
+											<option value="10014">天文学</option>
+											<option value="10015">地理科学</option>
+										</optgroup>
+										<optgroup label="语言类">
+											<option value="10021">对外汉语</option>
+											<option value="10022">六级雅思</option>
+											<option value="10023">考研英语</option>
+											<option value="10024">听力口语</option>
+											<option value="10025">写作翻译</option>
+										</optgroup>
+									</select>
+								</div>
+							</div>
+							<div class="layui-inline">
+								<button type="button" class="layui-btn layui-btn-normal" onclick="search(0)">查询</button>
+								<button type="button" class="layui-btn layui-btn-primary" onclick="search(1)">重置</button>
+							</div>
+						</div>
+						<table class="layui-table" id="contentTable">
+							<thead>
+								<tr>
+									<th>序号</th>
+									<th>产品图片</th>
+									<th>产品名称</th>
+									<th>产品所属目录</th>
+									<th>产品所属分类</th>
+									<th>所需积分</th>
+									<th>下单人</th>
+									<th>下单时间</th>
+									<th>操作</th>
+								</tr> 
+							</thead>
+							<tbody>
+								<tr class="line_1">
+									<td>1</td>
+									<td>
+										<input type="hidden" value="../static/images/sc_c.jpg"/>
+										<a class="galpop-single" href="../static/images/sc_c.jpg" title="点击可查看大图">
+											<img src="../static/images/sc_c.jpg" class="img-thumbnail" style="max-width:80px;width:80px;height:50px;"/>
+										</a>
+									</td>
+									<td>C语言入门</td>
+									<td>视频</td>
+									<td>C</td>
+									<td style="font-weight:bold;color:#ffb800;font-size:16px;">2.8</td>
+									<td>测试用户</td>
+									<td>2020-05-22</td>
+									<td>
+										<button type="button" class="layui-btn layui-btn-danger layui-btn-sm" title="删除" onclick="deleteLine(1)"><i class="layui-icon"></i></button>
+									</td>
+								</tr>
+								<tr class="line_2">
+									<td>2</td>
+									<td>
+										<input type="hidden" value="../static/images/sc_java.png"/>
+										<a class="galpop-single" href="../static/images/sc_java.png" title="点击可查看大图">
+											<img src="../static/images/sc_java.png" class="img-thumbnail" style="max-width:80px;width:80px;height:50px;"/>
+										</a>
+									</td>
+									<td>Java程序设计</td>
+									<td>视频</td>
+									<td>Java</td>
+									<td style="font-weight:bold;color:#ffb800;font-size:16px;">3.7</td>
+									<td>测试用户</td>
+									<td>2020-05-22</td>
+									<td>
+										<button type="button" class="layui-btn layui-btn-danger layui-btn-sm" title="删除" onclick="deleteLine(2)"><i class="layui-icon"></i></button>
+									</td>
+								</tr>
+								<tr class="line_3">
+									<td>3</td>
+									<td>
+										<input type="hidden" value="../static/images/sc_python.jpg"/>
+										<a class="galpop-single" href="../static/images/sc_python.jpg" title="点击可查看大图">
+											<img src="../static/images/sc_python.jpg" class="img-thumbnail" style="max-width:80px;width:80px;height:50px;"/>
+										</a>
+									</td>
+									<td>Python程序设计</td>
+									<td>视频</td>
+									<td>Python</td>
+									<td style="font-weight:bold;color:#ffb800;font-size:16px;">4</td>
+									<td>测试用户</td>
+									<td>2020-05-22</td>
+									<td>
+										<button type="button" class="layui-btn layui-btn-danger layui-btn-sm" title="删除" onclick="deleteLine(3)"><i class="layui-icon"></i></button>
+									</td>
+								</tr>
+								<tr class="line_4">
+									<td>4</td>
+									<td>
+										<input type="hidden" value="../static/images/sc_wl.jpg"/>
+										<a class="galpop-single" href="../static/images/sc_wl.jpg" title="点击可查看大图">
+											<img src="../static/images/sc_wl.jpg" class="img-thumbnail" style="max-width:80px;width:80px;height:50px;"/>
+										</a>
+									</td>
+									<td>大学物理—量子物理基础及应用</td>
+									<td>电子书</td>
+									<td>物理</td>
+									<td style="font-weight:bold;color:#ffb800;font-size:16px;">3.8</td>
+									<td>测试用户</td>
+									<td>2020-05-22</td>
+									<td>
+										<button type="button" class="layui-btn layui-btn-danger layui-btn-sm" title="删除" onclick="deleteLine(4)"><i class="layui-icon"></i></button>
+									</td>
+								</tr>
+								<tr class="line_5">
+									<td>5</td>
+									<td>
+										<input type="hidden" value="../static/images/sc_sx.jpg"/>
+										<a class="galpop-single" href="../static/images/sc_sx.jpg" title="点击可查看大图">
+											<img src="../static/images/sc_sx.jpg" class="img-thumbnail" style="max-width:80px;width:80px;height:50px;"/>
+										</a>
+									</td>
+									<td>概率论与数理统计</td>
+									<td>电子书</td>
+									<td>数学</td>
+									<td style="font-weight:bold;color:#ffb800;font-size:16px;">5</td>
+									<td>测试用户</td>
+									<td>2020-05-22</td>
+									<td>
+										<button type="button" class="layui-btn layui-btn-danger layui-btn-sm" title="删除" onclick="deleteLine(5)"><i class="layui-icon"></i></button>
+									</td>
+								</tr>
+								<tr class="line_6">
+									<td>6</td>
+									<td>
+										<input type="hidden" value="../static/images/sc_hx.jpg"/>
+										<a class="galpop-single" href="../static/images/sc_hx.jpg" title="点击可查看大图">
+											<img src="../static/images/sc_hx.jpg" class="img-thumbnail" style="max-width:80px;width:80px;height:50px;"/>
+										</a>
+									</td>
+									<td>仪器分析实验</td>
+									<td>电子书</td>
+									<td>化学</td>
+									<td style="font-weight:bold;color:#ffb800;font-size:16px;">6.6</td>
+									<td>测试用户</td>
+									<td>2020-05-22</td>
+									<td>
+										<button type="button" class="layui-btn layui-btn-danger layui-btn-sm" title="删除" onclick="deleteLine(6)"><i class="layui-icon"></i></button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div id="page"></div>
+				</div>
+			</div>
+		</div>
+		<link type="text/css" rel="stylesheet" href="../static/jquery-galpop/css/jquery.galpop.css" media="screen" />
+		<script type="text/javascript" src="../static/jquery/jquery-3.2.1.min.js"></script>
+		<script src="../static/layui-v2.5.6/layui/layui.js" charset="utf-8"></script>
+		<script type="text/javascript" src="../static/jquery-galpop/jquery.galpop.min.js"></script> 
+		<script>
+			$(document).ready(function() {
+				$('.galpop-single').galpop();
+			});
+			layui.use(['form','element'], function(){
+				var $ = layui.jquery
+				,element = layui.element;
+			});
+			layui.use(['rate'], function(){
+				var rate = layui.rate;
+				rate.render({
+					elem: '#score1'
+					,value: 4
+					,readonly: true
+				});
+				rate.render({
+					elem: '#score2'
+					,value: 5
+					,readonly: true
+				});
+				rate.render({
+					elem: '#score3'
+					,value: 3
+					,readonly: true
+				});
+			});
+			layui.use(['laypage', 'layer'], function(){
+				var laypage = layui.laypage
+				,layer = layui.layer;
+				// 总页数低于页码总数
+				laypage.render({
+					elem: 'page'
+					,theme: '#1E9FFF'
+					,count: 10 // 数据总数
+				});
+			});
+			 // 查询 
+			 function search(type){
+				if (type == 0) {
+					$("#contentTable tbody tr").css("display","");
+					var nameInput = $("#searchForm input[name='name']").val().trim();
+					var catalogueSelect = $("#searchForm #catalogue option:selected").text().trim();
+					var typeSelect = $("#searchForm #type option:selected").text().trim();
+					var usertypeSelect = $("#searchForm #usertype option:selected").text().trim();
+					for (var i = 0; i < $("#contentTable tbody tr").length; i++) {
+						var name = $("#contentTable tbody tr").eq(i).children('td').eq(2).text().trim();
+						var catalogue = $("#contentTable tbody tr").eq(i).children('td').eq(3).text().trim();
+						var type = $("#contentTable tbody tr").eq(i).children('td').eq(4).text().trim();
+						if (name.indexOf(nameInput) == -1 || catalogue.indexOf(catalogueSelect) == -1 || type.indexOf(typeSelect) == -1) {
+							$("#contentTable tbody tr").eq(i).css("display","none");
+						}
+					}
+				 } else {
+					 $("#contentTable tbody tr").css("display","");
+					 $("#searchForm input[name='name']").val("");
+					 $('#searchForm #catalogue').siblings("div.layui-form-select").find('dl').find('dd[lay-value=""]').click();
+					 $('#searchForm #type').siblings("div.layui-form-select").find('dl').find('dd[lay-value=""]').click();
+				 }
+			}
+			// 删除
+			function deleteLine(linenum) {
+				layer.confirm('您确认要删除该条信息吗？', {
+				  btn: ['确认','取消'], title : '系统提示', icon: 3
+				}, function(index){
+					$(".line_" + linenum).remove();
+					layer.close(index);
+					layer.msg('删除成功！',{icon:1});
+				})
+			}
+		</script>
+	</body>
+</html>
