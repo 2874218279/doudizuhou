@@ -99,7 +99,7 @@
 			<div class="layui-input-block">
 			  <button class="layui-btn layui-btn-normal" lay-submit lay-filter="formDemo">注册</button>
 			  <button type="reset" class="layui-btn layui-btn-primary" id="resetBtn">重置</button>
-			  <a href="../系统入口.html" style="margin-left:20px;color:#1f94ea;font-weight:bold;font-size:15px;">去登录</a>
+			  <a href="../index.html" style="margin-left:20px;color:#1f94ea;font-weight:bold;font-size:15px;">去登录</a>
 			</div>
 		  </div>
 		</form>
@@ -117,7 +117,7 @@
 		  form.on('submit(formDemo)', function(data){
 		     parent.layer.msg('注册成功！',{icon:1});
 			 var interval = setInterval(function(){
-				 location.href = "../系统入口.html";
+				 location.href = "../index.html";
 			}, 500);
 			 return false;
 		  });

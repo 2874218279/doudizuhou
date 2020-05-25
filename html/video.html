@@ -376,6 +376,12 @@
 						layer.msg('请上传视频资源！', {icon:0});
 						layer.tips('<b>请上传视频资源！</b>', '#upVideoFile', {tips: [1, '#ea5200']});
 						return false;
+					} else {
+						if (videopath.indexOf('video') == -1) {
+							layer.msg('请上传视频格式文件！', {icon:0});
+							layer.tips('<b>请上传视频格式文件！</b>', '#upVideoFile', {tips: [1, '#ea5200']});
+							return false;
+						}
 					}
 					var id = $("#inputForm input[name='id']").val();
 					var name = $("#inputForm input[name='name']").val();

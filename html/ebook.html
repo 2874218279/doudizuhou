@@ -367,6 +367,12 @@
 					if (ebookFileName == "") {
 						layer.msg('请上传电子书资源！', {icon:0});
 						return false;
+					} else {
+						var suffix = ebookFileName.substring(ebookFileName.length - 4,ebookFileName.length);
+						if (suffix != ".pdf") {
+							layer.msg('请上传PDF格式文件', {icon:0});
+							return false;
+						}
 					}
 					var id = $("#inputForm input[name='id']").val();
 					var name = $("#inputForm input[name='name']").val();
