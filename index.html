@@ -100,9 +100,15 @@
 	}
 </style>
 <script type="text/javascript" src="static/jquery/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="static/jquery-cookie/jquery.cookie.js"></script>
 <script src="static/layui-v2.5.6/layui/layui.all.js" charset="utf-8"></script>
 <script type="text/javascript">
 	$(function(){
+	
+		$.cookie('yssyxt_login_status', '123');
+		var yssyxt_login_status = $.cookie('yssyxt_login_status');
+		console.log("登录状态：" + yssyxt_login_status);
+	
 		$(".text").focus(function(){
 			$(this).css("border","1px solid blue");
 			$(this).css("box-shadow","blue 0px 0px 5px 0px");
