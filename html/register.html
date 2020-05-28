@@ -115,6 +115,11 @@
 		  var form = layui.form;
 		  // 监听提交
 		  form.on('submit(formDemo)', function(data){
+			var password = $("input[name='password']").val();
+			if (password.length < 6) {
+				layer.msg('密码不能少于6位！', {icon:0});
+				return false;
+			}
 		     parent.layer.msg('注册成功！',{icon:1});
 			 var interval = setInterval(function(){
 				 location.href = "../index.html";
